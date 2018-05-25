@@ -21,7 +21,7 @@ var Path,
 try {
   Path = app.activeDocument.path;
 } catch (e) {
-  Path = app.recentFiles[app.recentFiles.length - 1].toString();
+  Path = app.recentFiles[0].toString();
 }
 
 var Name = app.activeDocument.name.replace(/\.[^\.]+$/, '');
