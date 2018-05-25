@@ -12,7 +12,14 @@ var idCnvM = charIDToTypeID( "CnvM" );
     desc54.putClass( idT, idCMYM );
 executeAction( idCnvM, desc54, DialogModes.NO );
 
-var Path = app.activeDocument.path;
+var Path,
+  temp;
+try {
+  Path = app.activeDocument.path;
+} catch (e) {
+  Path = app.recentFiles[app.recentFiles.length - 1].toString();
+}
+
 var Name = app.activeDocument.name.replace(/\.[^\.]+$/, '');
 var Suffix = "print";
 var saveFile = File(Path + "/" + Name + "_" + Suffix + '.tif');
