@@ -16,39 +16,9 @@ var Path, NameTemp, Name, temp;
 try {
   Path = app.activeDocument.path;
 } catch (e) {
-
-    Path  = 0;
-
-    //decode and clean input
-    //Then delete numerical ending of multi page pdfs
-    NameTemp = decodeURI(app.activeDocument.name.toString().
-    replace(/((-\d\d)\.pdf)|((-\d)\.pdf)/g), '');
-
-    //if it was a single page pdf
-    NameTemp = NameTemp.replace('.pdf', '');
-
-    //if undefined was appended (yes, it may happen with regex)
-    NameTemp = NameTemp.replace('undefined', '')
-
-    Name = NameTemp;
-
-    for( var i =0; i < app.recentFiles.length; i++){
-
-       temp = decodeURI(app.recentFiles[i].toString()).split('/');
-       temp = temp[temp.length-1].replace('.pdf', '');
-
-       if ( temp == Name){
-          Path = decodeURI(app.recentFiles[i].toString());
-              break;
-       }
-    }
+  Path = app.recentFiles[0];
 }
 
-if(!Path){
-       alert ("Script couldn't find the path of opened file");
-} else {
-       // alert (Path);
-}
 
 var Name = app.activeDocument.name.replace(/\.[^\.]+$/, '');
 var Suffix = "print";
